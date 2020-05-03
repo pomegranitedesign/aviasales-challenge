@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Title from './Title'
-import Container from './Container'
 
 const Filters = () => {
 	return (
@@ -48,6 +47,7 @@ const Setting = styled.li`
 	display: flex;
 	align-items: center;
 	padding: 10px;
+	cursor: pointer;
 
 	&:hover {
 		background-color: #f1fcff;

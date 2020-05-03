@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { Fragment, useEffect } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
 
 import Header from './Components/Header'
@@ -6,23 +8,31 @@ import Filters from './Components/Filters'
 import Sort from './Components/Sort'
 import Container from './Components/Container'
 import Card from './Components/Card'
+import { fetchTickets } from './Actions/ticketsActions'
 
-const App = () => {
+const App = ({ state, fetchTickets }) => {
+	useEffect(
+		() => {
+			fetchTickets()
+		},
+		[ fetchTickets ]
+	)
+
 	return (
-		<div className="App">
+		<Fragment>
 			<Header />
 
 			<Container>
 				<Controls>
 					<Filters />
 
-					<div style={{ marginLeft: 20 }}>
+					<div style={{ marginLeft: 20, marginBottom: 20 }}>
 						<Sort />
-						<Card />
+						{state.loading ? <h1>Loading...</h1> : null}
 					</div>
 				</Controls>
 			</Container>
-		</div>
+		</Fragment>
 	)
 }
 
@@ -31,4 +41,7 @@ const Controls = styled.div`
 	align-items: flex-start;
 `
 
-export default App
+const mapStateToProps = ({ state }) => ({ state })
+const mapDispatchToProps = (dispatch) => bindActionCreators({ fetchTickets }, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
