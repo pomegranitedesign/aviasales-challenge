@@ -1,52 +1,59 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
+import moment from 'moment'
+import uuid from 'uuid/dist/v4'
 
+import { minutesToHours } from '../misc'
 import DemoLogo from '../Assets/Images/demoLogoCompany.png'
 
-const Card = () => {
+const Card = ({ price, segments = [] }) => {
 	return (
 		<Wrapper>
 			<Top>
-				<Price>13 400 Р</Price>
+				<Price>
+					{price.toString().substr(0, 2) +
+						' ' +
+						price
+							.toString()
+							.substr(2, price.toString().length)}{' '}
+					Р
+				</Price>
 				<Logo src={DemoLogo} />
 			</Top>
 
 			<Body>
 				<City>
-					<From>
-						<Label>MOW - HKT</Label>
-						<Info>10:45 - 8:00</Info>
-					</From>
+					{segments.map((segment) => (
+						<div
+							key={uuid()}
+							style={{
+								display: 'flex',
+								justifyContent: 'space-between'
+							}}
+						>
+							<From>
+								<Label>
+									{segment.origin} - {segment.destination}
+								</Label>
+								<Info>
+									{moment(segment.date).format('HH:MM')} -{' '}
+								</Info>
+							</From>
 
-					<To>
-						<Label>MOW - HKT</Label>
-						<Info>11:20 - 00:50</Info>
-					</To>
+							<From style={{ marginLeft: 100 }}>
+								<Label>В Пути</Label>
+								<Info>
+									{minutesToHours(segment.duration)[0]}
+								</Info>
+							</From>
+
+							<From style={{ marginLeft: 100 }}>
+								<Label>2 Пересадки</Label>
+								<Info>HKG, JNB</Info>
+							</From>
+						</div>
+					))}
 				</City>
-
-				<Time>
-					<From>
-						<Label>В Пути</Label>
-						<Info>21ч 15м</Info>
-					</From>
-
-					<To>
-						<Label>В Пути</Label>
-						<Info>13ч 30м</Info>
-					</To>
-				</Time>
-
-				<Transfers>
-					<From>
-						<Label>2 Пересадки</Label>
-						<Info>HKG, JNB</Info>
-					</From>
-
-					<To>
-						<Label>1 Пересадка</Label>
-						<Info>HKG</Info>
-					</To>
-				</Transfers>
 			</Body>
 		</Wrapper>
 	)
@@ -86,7 +93,7 @@ const City = styled.div``
 
 const Time = styled.div``
 
-const Transfers = styled.div``
+const Transfers = styled.div`margin-left: 40px;`
 
 const Label = styled.label`
 	color: #a0b0b9;
@@ -100,7 +107,11 @@ const Info = styled.h4`
 	font-weight: 600;
 `
 
-const From = styled.div`margin-bottom: 10px;`
+const From = styled.div`
+	margin-bottom: 10px;
+	display: flex;
+	flex-direction: column;
+`
 
 const To = styled.div``
 

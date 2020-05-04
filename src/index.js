@@ -10,8 +10,15 @@ import rootReducer from './Reducers'
 import { saveState, loadState } from './misc'
 import './index.css'
 
-const store = createStore(rootReducer, loadState(), composeWithDevTools(applyMiddleware(thunk)))
-store.subscribe(() => saveState({ tickets: store.getState().tickets }))
+const store = createStore(
+	rootReducer,
+	loadState(),
+	composeWithDevTools(applyMiddleware(thunk))
+)
+store.subscribe(() => {
+	console.log(store.getState())
+	saveState(store.getState())
+})
 
 render(
 	<React.StrictMode>
@@ -21,4 +28,3 @@ render(
 	</React.StrictMode>,
 	document.getElementById('root')
 )
-2

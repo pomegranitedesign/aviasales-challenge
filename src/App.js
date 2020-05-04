@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
+import uuid from 'uuid/dist/v4'
 
 import Header from './Components/Header'
 import Filters from './Components/Filters'
@@ -21,14 +22,24 @@ const App = ({ state, fetchTickets }) => {
 	return (
 		<Fragment>
 			<Header />
-
 			<Container>
 				<Controls>
 					<Filters />
-
 					<div style={{ marginLeft: 20, marginBottom: 20 }}>
 						<Sort />
-						{state.loading ? <h1>Loading...</h1> : null}
+						{state.tickets ? (
+							state.tickets
+								.slice(0, 5)
+								.map((ticket) => (
+									<Card
+										key={uuid()}
+										price={ticket.price}
+										segments={ticket.segments}
+									/>
+								))
+						) : (
+							<h1>Tickets are not in the array</h1>
+						)}
 					</div>
 				</Controls>
 			</Container>
@@ -42,6 +53,7 @@ const Controls = styled.div`
 `
 
 const mapStateToProps = ({ state }) => ({ state })
-const mapDispatchToProps = (dispatch) => bindActionCreators({ fetchTickets }, dispatch)
+const mapDispatchToProps = (dispatch) =>
+	bindActionCreators({ fetchTickets }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
