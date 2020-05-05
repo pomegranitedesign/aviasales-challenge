@@ -3,21 +3,14 @@ import styled from 'styled-components'
 import moment from 'moment'
 import uuid from 'uuid/dist/v4'
 
-import { minutesToHours } from '../misc'
+import { minutesToHours, formatPrice } from '../misc'
 import DemoLogo from '../Assets/Images/demoLogoCompany.png'
 
 const Card = ({ price, segments = [] }) => {
 	return (
 		<Wrapper>
 			<Top>
-				<Price>
-					{price.toString().substr(0, 2) +
-						' ' +
-						price
-							.toString()
-							.substr(2, price.toString().length)}{' '}
-					Р
-				</Price>
+				<Price>{formatPrice(price)}</Price>
 				<Logo src={DemoLogo} />
 			</Top>
 
@@ -36,7 +29,11 @@ const Card = ({ price, segments = [] }) => {
 									{segment.origin} - {segment.destination}
 								</Label>
 								<Info>
-									{moment(segment.date).format('HH:MM')} -{' '}
+									{moment(segment.date).format('HH:MM')} - {' '}
+									{moment
+										.utc(segment.date)
+										.add(segment.duration, 'seconds')
+										.format('HH:MM')}
 								</Info>
 							</From>
 
@@ -48,8 +45,24 @@ const Card = ({ price, segments = [] }) => {
 							</From>
 
 							<From style={{ marginLeft: 100 }}>
-								<Label>2 Пересадки</Label>
-								<Info>HKG, JNB</Info>
+								<Label>
+									{segment.stops.length > 1 ? (
+										`${segment.stops.length} Пересадки`
+									) : segment.stops.length === 1 ? (
+										`1 Пересадка`
+									) : (
+										'0 Пересадок'
+									)}
+								</Label>
+								<Info>
+									{segment.stops.length > 1 ? (
+										segment.stops.join(', ')
+									) : segment.stops.length === 1 ? (
+										segment.stops[0]
+									) : (
+										'Пересадок нет'
+									)}
+								</Info>
 							</From>
 						</div>
 					))}

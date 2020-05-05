@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
 import uuid from 'uuid/dist/v4'
+import Loader from 'react-loader'
 
 import Header from './Components/Header'
 import Filters from './Components/Filters'
@@ -38,7 +39,11 @@ const App = ({ state, fetchTickets }) => {
 									/>
 								))
 						) : (
-							<h1>Tickets are not in the array</h1>
+							<Loader
+								loaded={state.loading}
+								color="#2396F3"
+								top="500px"
+							/>
 						)}
 					</div>
 				</Controls>

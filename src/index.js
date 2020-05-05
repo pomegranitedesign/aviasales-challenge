@@ -12,12 +12,12 @@ import './index.css'
 
 const store = createStore(
 	rootReducer,
-	loadState(),
+	// loadState(),
 	composeWithDevTools(applyMiddleware(thunk))
 )
 store.subscribe(() => {
 	console.log(store.getState())
-	saveState(store.getState())
+	// saveState(store.getState())
 })
 
 render(

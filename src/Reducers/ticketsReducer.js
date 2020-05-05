@@ -1,4 +1,9 @@
-import { FETCH_TICKETS_SUCCESS, FETCH_TICKETS_START, FETCH_TICKETS_FAILURE } from '../Actions/types'
+import {
+	FETCH_TICKETS_SUCCESS,
+	FETCH_TICKETS_START,
+	FETCH_TICKETS_FAILURE,
+	SET_SORT_BY
+} from '../Actions/types'
 
 const _initialState = {
 	tickets: null,
@@ -10,6 +15,9 @@ const _initialState = {
 
 export default (state = _initialState, action) => {
 	switch (action.type) {
+		case SET_SORT_BY:
+			return { ...state, sortBy: action.sortBy }
+
 		case FETCH_TICKETS_FAILURE:
 			return { ...state, loading: false, error: action.error }
 

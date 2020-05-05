@@ -28,3 +28,13 @@ export const minutesToHours = (mins = 0) => {
 		moment.utc().hours(hours).minutes(minutes).format('HH:MM')
 	]
 }
+
+export const formatPrice = (price = '') => {
+	const formatter = new Intl.NumberFormat('en-US', {
+		style: 'currency',
+		currency: 'RUB',
+		minimumFractionDigits: 2
+	})
+
+	return formatter.format(price)
+}
