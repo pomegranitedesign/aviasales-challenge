@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import Title from './Title'
 
-const Filters = () => {
+const Filters = ({ setFilter }) => {
 	return (
 		<Wrapper>
 			<div style={{ padding: '20px 0 0 20px' }}>
@@ -12,19 +12,44 @@ const Filters = () => {
 
 			<Settings>
 				<Setting>
-					<Checkbox type="checkbox" /> <Label>Все</Label>
+					<Checkbox
+						type="checkbox"
+						defaultChecked
+						onClick={() => setFilter('ALL')}
+					/>{' '}
+					<Label>Все</Label>
 				</Setting>
+
 				<Setting>
-					<Checkbox type="checkbox" /> <Label>Без пересадок</Label>
+					<Checkbox
+						type="checkbox"
+						onClick={() => setFilter('NO_TRANSFERS')}
+					/>{' '}
+					<Label>Без пересадок</Label>
 				</Setting>
+
 				<Setting>
-					<Checkbox type="checkbox" /> <Label>1 пересадка</Label>
+					<Checkbox
+						type="checkbox"
+						onClick={() => setFilter('ONE_TRANSFER')}
+					/>{' '}
+					<Label>1 пересадка</Label>
 				</Setting>
+
 				<Setting>
-					<Checkbox type="checkbox" /> <Label>2 пересадки</Label>
+					<Checkbox
+						type="checkbox"
+						onClick={() => setFilter('TWO_TRANSFERS')}
+					/>{' '}
+					<Label>2 пересадки</Label>
 				</Setting>
+
 				<Setting>
-					<Checkbox type="checkbox" /> <Label>3 пересадки</Label>
+					<Checkbox
+						type="checkbox"
+						onClick={() => setFilter('THREE_TRANSFERS')}
+					/>{' '}
+					<Label>3 пересадки</Label>
 				</Setting>
 			</Settings>
 		</Wrapper>

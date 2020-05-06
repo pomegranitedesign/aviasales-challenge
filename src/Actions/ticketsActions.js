@@ -4,8 +4,11 @@ import {
 	FETCH_TICKETS_FAILURE,
 	FETCH_TICKETS_START,
 	FETCH_TICKETS_SUCCESS,
-	SET_SORT_BY
+	SET_SORT_BY,
+	SET_FILTER
 } from './types'
+
+export const setFilter = (filter = '') => ({ type: SET_FILTER, filter })
 
 export const setSortBy = (sortBy = '') => ({ type: SET_SORT_BY, sortBy })
 

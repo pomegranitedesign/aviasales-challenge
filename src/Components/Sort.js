@@ -1,24 +1,23 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
-const Sort = () => {
-	const [ sortBy, setSortBy ] = useState('lowest')
+const Sort = ({ setSortBy, sortBy = '' }) => {
 	return (
 		<Wrapper>
 			<Button
 				style={{ borderTopLeftRadius: 5, borderBottomLeftRadius: 5 }}
-				isActive={sortBy === 'lowest'}
+				isActive={sortBy === 'cheapest'}
 				value={sortBy}
-				onClick={() => setSortBy('lowest')}
+				onClick={() => setSortBy('cheapest')}
 			>
 				Самый Дешёвый
 			</Button>
 
 			<Button
+				style={{ borderTopRightRadius: 5, borderBottomRightRadius: 5 }}
 				isActive={sortBy === 'fastest'}
 				value={sortBy}
 				onClick={() => setSortBy('fastest')}
-				style={{ borderTopRightRadius: 5, borderBottomRightRadius: 5 }}
 			>
 				Самый Быстрый
 			</Button>
