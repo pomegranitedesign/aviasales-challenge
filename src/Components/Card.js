@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import moment from 'moment'
 import uuid from 'uuid/dist/v4'
@@ -104,10 +104,6 @@ const Body = styled.div`
 
 const City = styled.div``
 
-const Time = styled.div``
-
-const Transfers = styled.div`margin-left: 40px;`
-
 const Label = styled.label`
 	color: #a0b0b9;
 	font-size: 12px;
@@ -118,6 +114,7 @@ const Info = styled.h4`
 	color: #4a4a4a;
 	font-size: 14px;
 	font-weight: 600;
+	max-width: 90px;
 `
 
 const From = styled.div`
@@ -125,7 +122,5 @@ const From = styled.div`
 	display: flex;
 	flex-direction: column;
 `
-
-const To = styled.div``
 
 export default Card

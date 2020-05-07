@@ -12,7 +12,7 @@ export const setFilter = (filter = '') => ({ type: SET_FILTER, filter })
 
 export const setSortBy = (sortBy = '') => ({ type: SET_SORT_BY, sortBy })
 
-export const fetchTickets = (filter = '', sortBy = '') => async (dispatch) => {
+export const fetchTickets = () => async (dispatch) => {
 	dispatch({ type: FETCH_TICKETS_START })
 
 	const searchID = await axios.get(
@@ -24,18 +24,12 @@ export const fetchTickets = (filter = '', sortBy = '') => async (dispatch) => {
 			.searchId}`
 	)
 
-	if (response.status === 404)
-		response = await axios.get(
-			`https://front-test.beta.aviasales.ru/tickets?searchId=${searchID
-				.data.searchId}`
-		)
-
 	if (response.status === 200)
 		dispatch({
 			type: FETCH_TICKETS_SUCCESS,
 			tickets: response.data.tickets
 		})
-	else
+	else if (response.status === 500 || response.status === 404)
 		dispatch({
 			type: FETCH_TICKETS_FAILURE,
 			error: 'There was an error fetching tickets'

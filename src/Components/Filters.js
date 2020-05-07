@@ -11,19 +11,21 @@ const Filters = ({ setFilter }) => {
 			</div>
 
 			<Settings>
-				<Setting>
+				{/* <Setting>
 					<Checkbox
 						type="checkbox"
-						defaultChecked
 						onClick={() => setFilter('ALL')}
 					/>{' '}
 					<Label>Все</Label>
-				</Setting>
+				</Setting> */}
 
 				<Setting>
 					<Checkbox
 						type="checkbox"
-						onClick={() => setFilter('NO_TRANSFERS')}
+						onClick={(event) => {
+							if (event.target.checked) setFilter('NO_TRANSFERS')
+							else setFilter('ALL')
+						}}
 					/>{' '}
 					<Label>Без пересадок</Label>
 				</Setting>
@@ -31,7 +33,10 @@ const Filters = ({ setFilter }) => {
 				<Setting>
 					<Checkbox
 						type="checkbox"
-						onClick={() => setFilter('ONE_TRANSFER')}
+						onClick={(event) => {
+							if (event.target.checked) setFilter('ONE_TRANSFER')
+							else setFilter('ALL')
+						}}
 					/>{' '}
 					<Label>1 пересадка</Label>
 				</Setting>
@@ -39,7 +44,10 @@ const Filters = ({ setFilter }) => {
 				<Setting>
 					<Checkbox
 						type="checkbox"
-						onClick={() => setFilter('TWO_TRANSFERS')}
+						onClick={(event) => {
+							if (event.target.checked) setFilter('TWO_TRANSFERS')
+							else setFilter('ALL')
+						}}
 					/>{' '}
 					<Label>2 пересадки</Label>
 				</Setting>
@@ -47,7 +55,11 @@ const Filters = ({ setFilter }) => {
 				<Setting>
 					<Checkbox
 						type="checkbox"
-						onClick={() => setFilter('THREE_TRANSFERS')}
+						onClick={(event) => {
+							if (event.target.checked)
+								setFilter('THREE_TRANSFERS')
+							else setFilter('ALL')
+						}}
 					/>{' '}
 					<Label>3 пересадки</Label>
 				</Setting>
